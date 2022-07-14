@@ -1,48 +1,24 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
-
-const colorPalette = document.querySelector('.boxes');
-const colorBoxesList = [];
-
-for (let i = 0; i < 60; i += 1) {
-  const color = getRandomHexColor();
-  const colorCard = `
-         <div class="box">
-        <div class="color"
-        data-color = '${color}';
-        style='background-color: ${color}'></div>
-        <p>Press color!</p>
-        <p>Color: ${color}</p>
-    </div>
-        `;
-  colorBoxesList.push(colorCard);
-}
-
-colorPalette.insertAdjacentHTML('beforeend', colorBoxesList.join(''));
-
-colorPalette.addEventListener('click', onColorBoxChenge);
-
-function onColorBoxChenge(evt) {
-    if (!evt.target.classList.contains('color')) {
-        return;
+function sumArray(array) {
+    const arr = [...array].sort((a, b) => a - b);
+    let summArr = 0;
+    for (let i = 1; i < arr.length - 1; i += 1) {
+        summArr += arr[i];
     }
-
-    const currentColorCard = document.querySelector('.box.is-active');
-
-    if (currentColorCard) {
-        currentColorCard.classList.remove('is-active');
-    }
-
-        const parentColorCard = evt.target.closest('.box');
-
-        parentColorCard.classList.add('is-active');
-
-    document.body.style.backgroundColor = evt.target.dataset.color;
-    console.log(currentColorCard);
-
+    return summArr;
 }
 
 
+console.log(sumArray(null));
+
+// const { assert } = require('chai');
+
+// it('example tests', () => {
+//   assert.strictEqual(sumArray(null), 0);
+//   assert.strictEqual(sumArray([]), 0);
+//   assert.strictEqual(sumArray([3]), 0);
+//   assert.strictEqual(sumArray([3, 5]), 0);
+//   assert.strictEqual(sumArray([6, 2, 1, 8, 10]), 16);
+//   assert.strictEqual(sumArray([0, 1, 6, 10, 10]), 17);
+//   assert.strictEqual(sumArray([-6, -20, -1, -10, -12]), -28);
+//   assert.strictEqual(sumArray([-6, 20, -1, 10, -12]), 3);
+// });
